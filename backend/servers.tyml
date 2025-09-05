@@ -1,0 +1,10 @@
+// servers.tomlのスキーマ
+
+type Server {
+    ip: string
+    port: int
+    name: string
+    description: string
+}
+
+servers: [Server]

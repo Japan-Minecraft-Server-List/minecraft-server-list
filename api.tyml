@@ -1,0 +1,32 @@
+/// サーバーリストの要素
+type Server {
+    /// MinecraftサーバーのIPアドレス
+    ip: string
+    /// Minecraftサーバーのポート
+    port: int
+    /// サーバーの名前
+    name: string
+    /// サーバーの説明欄
+    /// 改行可
+    description: string
+    /// プレイヤー人数
+    players_online: int
+    /// 最大プレイ人数
+    players_max: int
+}
+
+/// サーバーリストの順序
+enum Ordering {
+    /// プレイヤーの多い順
+    "Player"
+    /// プレイヤーの少ない順
+    "PlayerReverse"
+}
+
+interface API {
+    /// サーバーリストを取得する
+    /// 配列の順序はorderingに準拠する
+    /// 定期的に更新するならキャッシュしても問題ない
+    #[kind = "get"]
+    function get_server_list(ordering: Ordering = "Player") -> [Server]
+}
