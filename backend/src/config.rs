@@ -8,7 +8,7 @@ pub struct ServersConfig {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct ServerConfig {
     pub ip: String,
-    pub port: i32,
+    pub port: Option<u16>,
     pub name: String,
     pub description: String,
 }

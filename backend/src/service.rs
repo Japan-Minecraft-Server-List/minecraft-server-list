@@ -63,7 +63,7 @@ impl Service {
 
             // pingを飛ばす全タスク
             let tasks = servers_config.servers.iter().map(|server| async {
-                MinecraftServerInfo::query(server.ip.as_str(), server.port as _).await
+                MinecraftServerInfo::query(server.ip.as_str(), server.port).await
             });
 
             // 一斉にpingを飛ばしてすべての結果を待つ
@@ -77,7 +77,7 @@ impl Service {
                     Ok(status) => {
                         final_server_status.push(MinecraftServerStatus {
                             ip: server.ip.clone(),
-                            port: server.port,
+                            port: status.port_effective as _,
                             name: server.name.clone(),
                             description: server.description.clone(),
                             is_online: true,
@@ -89,7 +89,7 @@ impl Service {
                     Err(_) => {
                         final_server_status.push(MinecraftServerStatus {
                             ip: server.ip.clone(),
-                            port: server.port,
+                            port: 25565,
                             name: server.name.clone(),
                             description: server.description.clone(),
                             is_online: false,

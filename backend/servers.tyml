@@ -1,9 +1,14 @@
 // servers.tomlのスキーマ
 
+/// サーバー情報
 type Server {
+    /// IPアドレス
     ip: string
-    port: int
+    /// 省略する場合はSRVレコードを参照する
+    port: int?
+    /// サーバーの表示名
     name: string
+    /// サーバーの説明欄
     description: string
 }
 

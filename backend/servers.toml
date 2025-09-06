@@ -1,7 +1,6 @@
 # !tyml servers.tyml
 
 [[servers]]
-ip = "mc.azisaba.net"
-port = 25565
+ip = "azisaba.net"
 name = "アジ鯖"
 description = "アジ鯖、楽しい。"
