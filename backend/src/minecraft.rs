@@ -379,4 +379,3 @@ fn extract_text(v: &serde_json::Value) -> String {
         _ => String::new(),
     }
 }
-
