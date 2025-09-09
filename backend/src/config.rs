@@ -9,6 +9,7 @@ pub struct ServersConfig {
 pub struct ServerConfig {
     pub ip: String,
     pub port: Option<u16>,
+    pub icon: String,
     pub name: String,
     pub description: String,
 }

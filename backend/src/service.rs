@@ -78,6 +78,7 @@ impl Service {
                         final_server_status.push(MinecraftServerStatus {
                             ip: server.ip.clone(),
                             port: status.port_effective as _,
+                            icon: server.icon.clone(),
                             name: server.name.clone(),
                             description: server.description.clone(),
                             is_online: true,
@@ -90,6 +91,7 @@ impl Service {
                         final_server_status.push(MinecraftServerStatus {
                             ip: server.ip.clone(),
                             port: 25565,
+                            icon: server.icon.clone(),
                             name: server.name.clone(),
                             description: server.description.clone(),
                             is_online: false,
@@ -125,6 +127,7 @@ impl Service {
 pub struct MinecraftServerStatus {
     pub ip: String,
     pub port: i32,
+    pub icon: String,
     pub name: String,
     pub description: String,
     pub is_online: bool,

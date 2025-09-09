@@ -38,11 +38,13 @@ impl API for ApiServer {
                     .iter()
                     .map(|status| Server {
                         ip: status.ip.clone(),
+                        icon: status.icon.clone(),
                         name: status.name.clone(),
                         port: status.port as _,
                         description: status.description.clone(),
                         players_online: status.players_online as _,
                         players_max: status.players_max as _,
+                        version_name: status.version_name.clone(),
                     })
                     .collect()
             }
@@ -57,11 +59,13 @@ impl API for ApiServer {
                     .iter()
                     .map(|status| Server {
                         ip: status.ip.clone(),
+                        icon: status.icon.clone(),
                         name: status.name.clone(),
                         port: status.port as _,
                         description: status.description.clone(),
                         players_online: status.players_online as _,
                         players_max: status.players_max as _,
+                        version_name: status.version_name.clone(),
                     })
                     .collect()
             }

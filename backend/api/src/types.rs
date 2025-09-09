@@ -16,17 +16,21 @@ PlayerReverse,
 pub struct Server {
     /// Minecraftサーバーのポート
     pub port: i64,
-    /// MinecraftサーバーのIPアドレス
-    pub ip: String,
     /// サーバーの名前
     pub name: String,
-    /// プレイヤー人数
-    pub players_online: i64,
+    /// バージョン名
+    pub version_name: String,
+    /// 最大プレイ人数
+    pub players_max: i64,
+    /// アイコンとなるアイテム名
+    pub icon: String,
     /// サーバーの説明欄
     /// 改行可
     pub description: String,
-    /// 最大プレイ人数
-    pub players_max: i64,
+    /// MinecraftサーバーのIPアドレス
+    pub ip: String,
+    /// プレイヤー人数
+    pub players_online: i64,
 }
 
 

@@ -4,6 +4,8 @@ type Server {
     ip: string
     /// Minecraftサーバーのポート
     port: int
+    /// アイコンとなるアイテム名
+    icon: string
     /// サーバーの名前
     name: string
     /// サーバーの説明欄
@@ -13,6 +15,8 @@ type Server {
     players_online: int
     /// 最大プレイ人数
     players_max: int
+    /// バージョン名
+    version_name: string
 }
 
 /// サーバーリストの順序

@@ -6,6 +6,8 @@ type Server {
     ip: string
     /// 省略する場合はSRVレコードを参照する
     port: int?
+    /// アイコンとなるアイテム名
+    icon: string
     /// サーバーの表示名
     name: string
     /// サーバーの説明欄
