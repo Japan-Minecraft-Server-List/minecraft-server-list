@@ -4,6 +4,8 @@ type Server {
     ip: string
     /// Minecraftサーバーのポート
     port: int
+    /// オンラインかどうか
+    is_online: bool
     /// アイコンとなるアイテム名
     icon: string
     /// サーバーの名前

@@ -20,17 +20,20 @@ object ServerListService {
 
         // 10分ごとにバックエンドサーバーに問い合わせ
         Thread {
-            try {
-                serverListPlayersOrder = api.getServerList(Ordering.PLAYER)
-                serverListPlayersReverseOrder = api.getServerList(Ordering.PLAYERREVERSE)
-            } catch (error: Exception) {
-                MinecraftServerList.plugin.logger.warning("Failed to get server list!")
-                error.printStackTrace()
+            while (true) {
+                try {
+                    serverListPlayersOrder = api.getServerList(Ordering.PLAYER)
+                    serverListPlayersReverseOrder = api.getServerList(Ordering.PLAYERREVERSE)
+                } catch (error: Exception) {
+                    MinecraftServerList.plugin.logger.warning("Failed to get server list!")
+                    error.printStackTrace()
+                }
+                for (task in onUpdate) {
+                    task.run()
+                }
+                MinecraftServerList.plugin.logger.info("Server list is updated!")
+                sleep(Duration.ofMinutes(10).toMillis())
             }
-            for (task in onUpdate) {
-                task.run()
-            }
-            sleep(Duration.ofMinutes(10).toMillis())
         }.start()
     }
 

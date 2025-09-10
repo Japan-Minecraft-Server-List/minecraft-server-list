@@ -14,23 +14,25 @@ PlayerReverse,
 #[allow(non_snake_case)]
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Server {
-    /// Minecraftサーバーのポート
-    pub port: i64,
-    /// サーバーの名前
-    pub name: String,
     /// バージョン名
     pub version_name: String,
     /// 最大プレイ人数
     pub players_max: i64,
     /// アイコンとなるアイテム名
     pub icon: String,
+    /// Minecraftサーバーのポート
+    pub port: i64,
+    /// サーバーの名前
+    pub name: String,
+    /// オンラインかどうか
+    pub is_online: bool,
+    /// プレイヤー人数
+    pub players_online: i64,
     /// サーバーの説明欄
     /// 改行可
     pub description: String,
     /// MinecraftサーバーのIPアドレス
     pub ip: String,
-    /// プレイヤー人数
-    pub players_online: i64,
 }
 
 

@@ -35,17 +35,19 @@ class ServerListGUI(private val ordering: Ordering) {
             // nullを指定すると空白になりアイテムを配置したりできるようになる
             val V: ArtButton? = null
             // ボタンを作成
-            val G = ArtButton(ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).name("&a").build())
+            val G = ArtButton(ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).name("&r").build())
 
             // ページ移動用ボタンを作成
             val N =
                 PageNextButton(ItemBuilder(Material.ARROW).name("&r次のページ | Next &7[{NextPage}/{MaxPage}]").build())
+            N.alternativeButton = ArtButton(ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).name("&r").build())
 
             //ページ移動用ボタンを作成
             val P =
                 PageBackButton(
                     ItemBuilder(Material.ARROW).name("&r前のページ | Prev &7[{PreviousPage}/{MaxPage}]").build()
                 )
+            P.alternativeButton = ArtButton(ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).name("&r").build())
             // 閉じるボタンを作成
             val C = ArtButton(
                 ItemBuilder(Material.OAK_DOOR).name("&r&6閉じる").build()
@@ -98,15 +100,19 @@ class ServerListGUI(private val ordering: Ordering) {
             }
 
             for (server in serverList) {
+                if (!server.isOnline) {
+                    continue
+                }
+
                 val icon = try {
                     Material.valueOf(server.icon.uppercase())
                 } catch (_: Exception) {
                     Material.GRASS_BLOCK
                 }
 
-                val name = "&r${server.name}&r [${server.playersOnline}/${server.playersMax}]"
+                val name = "&r${server.name}&r &7[${server.playersOnline}/${server.playersMax}]"
 
-                val description = mutableListOf("&r&7Version: ${server.versionName}", "")
+                val description = mutableListOf("&r&7${server.versionName}", "")
                 description.addAll(server.description.split("\n").map { line -> "&r$line" })
 
                 menu.addButton(
@@ -123,6 +129,16 @@ class ServerListGUI(private val ordering: Ordering) {
                         player.transfer(server.ip, server.port.toInt())
                     }
                 )
+            }
+
+            // 空欄にはガラスを設置
+            for (page in 0..menu.currentMaxPage) {
+                val components = menu.getPageComponents(page)
+                for (slot in 0 until components.size) {
+                    if (components[slot] == null) {
+                        components[slot] = ArtButton(ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).name("&r").build())
+                    }
+                }
             }
         }
 

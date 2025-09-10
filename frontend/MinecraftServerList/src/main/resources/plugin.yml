@@ -2,4 +2,3 @@ name: MinecraftServerList
 version: '1.0-SNAPSHOT'
 main: com.github.bea4dev.minecraftServerList.MinecraftServerList
 api-version: '1.20.5'
-depend: [ ProtocolLib ]

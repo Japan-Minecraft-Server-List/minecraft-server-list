@@ -117,8 +117,8 @@ impl Service {
 
             info!("Getting status is completed!");
 
-            // 指定の秒数待って繰り返す
-            sleep(Duration::from_secs(10)).await;
+            // 10分待って繰り返す
+            sleep(Duration::from_secs(600)).await;
         }
     }
 }

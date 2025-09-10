@@ -35,6 +35,27 @@ enum class Ordering {
 @Serializable
 data class Server (
     /**
+     * プレイヤー人数
+     */
+    @SerialName("players_online") val playersOnline: Long,
+    /**
+     * バージョン名
+     */
+    @SerialName("version_name") val versionName: String,
+    /**
+     * サーバーの説明欄
+     * 改行可
+     */
+    @SerialName("description") val description: String,
+    /**
+     * アイコンとなるアイテム名
+     */
+    @SerialName("icon") val icon: String,
+    /**
+     * オンラインかどうか
+     */
+    @SerialName("is_online") val isOnline: Boolean,
+    /**
      * MinecraftサーバーのIPアドレス
      */
     @SerialName("ip") val ip: String,
@@ -47,26 +68,9 @@ data class Server (
      */
     @SerialName("name") val name: String,
     /**
-     * バージョン名
-     */
-    @SerialName("version_name") val versionName: String,
-    /**
-     * アイコンとなるアイテム名
-     */
-    @SerialName("icon") val icon: String,
-    /**
      * 最大プレイ人数
      */
     @SerialName("players_max") val playersMax: Long,
-    /**
-     * サーバーの説明欄
-     * 改行可
-     */
-    @SerialName("description") val description: String,
-    /**
-     * プレイヤー人数
-     */
-    @SerialName("players_online") val playersOnline: Long,
 )
 
 
