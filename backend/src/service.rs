@@ -30,12 +30,39 @@ impl Service {
         loop {
             info!("Getting server status...");
 
-            // ファイルのopenを試みる
-            let Ok(mut file) = File::open("./servers.toml").await else {
-                warn!("Faileed to open servers.toml");
-                warn!("Retry in 10 seconds...");
+            async fn download() -> Result<(), String> {
+                let url = "https://raw.githubusercontent.com/Japan-Minecraft-Server-List/Minecraft-Servers-Registry/refs/heads/main/servers.toml";
+                let out = "servers.toml";
 
-                sleep(Duration::from_secs(10)).await;
+                let bytes = reqwest::get(url)
+                    .await
+                    .map_err(|error| error.to_string())?
+                    .error_for_status()
+                    .map_err(|error| error.to_string())?
+                    .bytes()
+                    .await
+                    .map_err(|error| error.to_string())?;
+                tokio::fs::write(out, bytes)
+                    .await
+                    .map_err(|error| error.to_string())?;
+
+                Ok(())
+            }
+
+            if let Err(error) = download().await {
+                warn!("Faileed to download servers.toml : {}", error.to_string());
+                warn!("Retry in 60 seconds...");
+
+                sleep(Duration::from_secs(60)).await;
+                continue;
+            }
+
+            // ファイルのopenを試みる
+            let Ok(mut file) = File::open("servers.toml").await else {
+                warn!("Faileed to open servers.toml");
+                warn!("Retry in 60 seconds...");
+
+                sleep(Duration::from_secs(60)).await;
                 continue;
             };
 
@@ -43,9 +70,9 @@ impl Service {
             let mut source = String::new();
             if let Err(_) = file.read_to_string(&mut source).await {
                 warn!("Faileed to read as utf-8 servers.toml");
-                warn!("Retry in 10 seconds...");
+                warn!("Retry in 60 seconds...");
 
-                sleep(Duration::from_secs(10)).await;
+                sleep(Duration::from_secs(60)).await;
                 continue;
             };
 
@@ -54,9 +81,9 @@ impl Service {
                 Ok(config) => config,
                 Err(error) => {
                     warn!("Faileed to read servers.toml : {}", error);
-                    warn!("Retry in 10 seconds...");
+                    warn!("Retry in 60 seconds...");
 
-                    sleep(Duration::from_secs(10)).await;
+                    sleep(Duration::from_secs(60)).await;
                     continue;
                 }
             };
